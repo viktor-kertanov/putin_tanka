@@ -164,3 +164,7 @@ token.json
 
 #img for exotic poem methods
 webapp/static/images/custom_img_dir/**/
+
+*.mbox
+*.csv
+*.pdf

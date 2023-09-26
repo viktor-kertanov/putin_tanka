@@ -75,6 +75,7 @@ def putin_input(pos_list, slbls_count_input=False, nlp_doc=False):
     pattern = []
     for pos_idx, pos in enumerate(pos_list, start=1):
         p_intj =  {"POS": {"IN": ["INTJ"]}, "OP": "*"}
+        p_conj =  {"POS": {"IN": ["SCONJ"]}, "OP": "*"}
         p0 =  {"POS": {"IN": ["PRON"]}, "OP": "*"}
         p1 = {"POS":  {"IN": [pos]}}
         pattern.append(p0)
@@ -91,6 +92,7 @@ def putin_input(pos_list, slbls_count_input=False, nlp_doc=False):
             pattern.append(p4)
             pattern.append(p5)
             pattern.append(p6)
+            pattern.append(p_conj)
     
     matcher.add("with_without_punct", [pattern])
     matches = matcher(nlp_doc)
@@ -153,12 +155,12 @@ if __name__ == '__main__':
     # ['VERB', 'ADV', 'DET', 'NOUN']
 
     '''
-    И есть. Но не надо / Не получится и сейчас
-    Благодарю вас за труд, поддержку / Переходить из руки в руки.
-    белым порошком / грязное дело / западный блок / великая страна
-    '''
-    a = putin_input(['ADV', 'ADV', 'ADV'])
-    b = putin_input(['ADP', 'PRON', 'VERB', 'NOUN'])
-    с = putin_input(['ADP', 'NOUN', 'VERB', 'PUNCT'])
+    Коллеги не любят,
 
+    '''
+    p_input = 'ADJ-NOUN'
+    inp = p_input.split('-')
+    a = putin_input(inp)
+    # b = putin_input(['ADP', 'PRON', 'VERB', 'NOUN'])
+    # с = putin_input(['ADP', 'NOUN', 'VERB', 'PUNCT'])
     print('Hello world!')
